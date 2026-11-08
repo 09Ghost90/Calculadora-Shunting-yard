@@ -2,6 +2,7 @@
 import { tokenizar } from './tokenizar.js'
 import { converterParaRpn, calcularRPN } from './converterParaRpn.js';
 
+// Referencia aos elementos da tela
 const teclas = document.querySelectorAll('#teclado button');
 const display = document.getElementById('display');
 
@@ -20,6 +21,7 @@ for (let i = 0; i < teclas.length; i++) {
             tokens.length = 0;
             houveErro = false;
         }
+
         // Função CLEAR
         else if (valor === 'C') {
             display.value = '0';
@@ -31,7 +33,9 @@ for (let i = 0; i < teclas.length; i++) {
         }
         else if (valor === '=') {
             try {
-                const tokensConvertidos = tokenizar(tokens);
+                const tokensConvertidos = tokenizar(tokens); // Envia para função tokenizar
+
+                // Verifica se o último token é operador
                 const ultimoToken = tokensConvertidos[tokensConvertidos.length - 1];
 
                 if (['+', '-', 'x', '÷', '/'].includes(ultimoToken)) {
