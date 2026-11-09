@@ -35,10 +35,10 @@ for (let i = 0; i < teclas.length; i++) {
             try {
                 const tokensConvertidos = tokenizar(tokens); // Retorna resultado {12, +, 34}
 
-                // Verifica se o último token é operador. Ex:  {12, +} removeria o +
-                const ultimoToken = tokensConvertidos[tokensConvertidos.length - 1];
+                // Remove os operadores que sobraram no final. Ex: {5, x, ~} vira {5}
+                const operadores = ['+', '-', 'x', '÷', '/', '~'];
 
-                if (['+', '-', 'x', '÷', '/'].includes(ultimoToken)) {
+                while (operadores.includes(tokensConvertidos[tokensConvertidos.length - 1])) {
                     tokensConvertidos.pop();
                 }
                 

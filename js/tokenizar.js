@@ -18,7 +18,15 @@ export function tokenizar(tokens)  {
                 resultado.push(numero); // Adiciona o numero acumulado na variável numero
                 numero = '';
             }
-            resultado.push(token); // Operador ou outro token que não faz parte do número
+            
+            // O "-" é unário no início da expressão, depois de um operador ou depois de "("
+            const anterior = resultado[resultado.length - 1];
+            const ehUnario = token === '-' && (
+                anterior === undefined ||
+                ['+', '-', 'x', '÷', '/', '%', '(', '~'].includes(anterior)
+            );
+
+            resultado.push(ehUnario ? '~' : token); // Operador ou outro token que não faz parte do número
         }
     }
 

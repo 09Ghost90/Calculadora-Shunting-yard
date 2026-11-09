@@ -1,5 +1,11 @@
 function precedencia(operador) {
 
+    if (operador === '~') return 3; // Menos unário: maior precedência
+
+    if (operador === '+' || operador === '-') {
+        return 1;
+    }
+
     // Encontrar ( empilhe e ao encontrar ) retire operadores até encontrar a abertura novamente
     if (operador === 'x' || operador === '/' || operador === '÷' || operador === '%')
         return 2;
@@ -45,6 +51,7 @@ export function converterParaRpn(tokensConvertidos) { // {12, +, 34}
             // o operador do topo deve ser calculado primeiro:
             // tira ele da pilha e manda para a saída
             while (
+                token !== '~' &&
                 pilhaOperadores.length > 0 &&
                 precedencia(pilhaOperadores[pilhaOperadores.length -1]) >= precedencia(token) // Verifica se o operador no topo da pilha tem precedência maior ou igual à do operador atual.
             ) {
@@ -68,6 +75,10 @@ export function calcularRPN(rpn) {
 
         if (!isNaN(Number(token)) && token !== '') {
             pilha.push(Number(token));
+
+        } else if (token === '~') {
+            pilha.push(-pilha.pop());
+
         } else {
             const b = pilha.pop(); // Segundo operando
             const a = pilha.pop(); // Primeiro operando
