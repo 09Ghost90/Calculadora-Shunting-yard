@@ -7,7 +7,7 @@ Calculadora web feita em HTML, CSS e JavaScript puro. Ela respeita a precedênci
 
 ## Funcionalidades
 
-- Operações: soma `+`, subtração `-`, multiplicação `*`, divisão `/` e resto `%`
+- Operações: soma `+`, subtração `-`, multiplicação `*`, divisão `/`
 - Precedência correta: `12 + 3 / 2 - 1` resulta em `12.5`
 - Operadores de mesma prioridade resolvidos da esquerda para a direita: `8 - 3 - 2` resulta em `3`
 - `C` limpa tudo e `⌫` apaga o último caractere
@@ -100,10 +100,8 @@ Ao clicar em `=`, o resultado vai para o display com `display.value = String(res
 
 ## Limitações conhecidas
 
-- **Números decimais**: o `.` não é tratado como parte do número em `tokenizar()`, então contas como `1.5 + 1` não funcionam.
 - **Parênteses**: ainda não implementados.
 - **Números negativos**: um `-` no início da expressão (menos unário) não é reconhecido.
-- **Divisão por zero**: retorna `Infinity`.
 - **`%`**: calcula o resto da divisão, não porcentagem.
 - **Ponto flutuante**: `0.1 + 0.2` mostra `0.30000000000000004`, como em qualquer cálculo com `Number` no JavaScript.
 

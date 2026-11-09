@@ -10,30 +10,30 @@ function precedencia(operador) {
     return 0;
 }
 
-export function converterParaRpn(tokensConvertidos) {
-    const pilhaOperadores = [];
-    const saida = [];
+export function converterParaRpn(tokensConvertidos) { // {12, +, 34}
+    const pilhaOperadores = []; // +
+    const saida = []; // 12, 34, +
 
     for (let i = 0; i < tokensConvertidos.length; i++) {
         const token = tokensConvertidos[i];
 
         // Número: vai direto para a saída
         if (!isNaN(Number(token)) && token !== '') {
-            saida.push(token);
+            saida.push(token); // Adiciona o 12 na saida
         }
         
         // Abre parêntese: só empilha
         else if (token === '(') {
-            pilhaOperadores.push(token);
+            pilhaOperadores.push(token); // Adiciona na pilhaOperadores
         }
         
         // Fecha parêntese: desempilha tudo até achar o '('
         else if (token === ')') {
             while (
                 pilhaOperadores.length > 0 &&
-                pilhaOperadores[pilhaOperadores.length -1] !== ('(')
+                pilhaOperadores[pilhaOperadores.length -1] !== ('(') // Para de desempilhar quando encontrar '('.
             ) {
-                saida.push(pilhaOperadores.pop());
+                saida.push(pilhaOperadores.pop()); // Desempilhando
             }
             pilhaOperadores.pop(); // Descarta o '(' (ele não vai para a saída)
         }
@@ -46,7 +46,7 @@ export function converterParaRpn(tokensConvertidos) {
             // tira ele da pilha e manda para a saída
             while (
                 pilhaOperadores.length > 0 &&
-                precedencia(pilhaOperadores[pilhaOperadores.length -1]) >= precedencia(token)
+                precedencia(pilhaOperadores[pilhaOperadores.length -1]) >= precedencia(token) // Verifica se o operador no topo da pilha tem precedência maior ou igual à do operador atual.
             ) {
                 saida.push(pilhaOperadores.pop());
             }
@@ -84,5 +84,21 @@ export function calcularRPN(rpn) {
             else if (token === '%') pilha.push(a % b);
         }
     }
-    return pilha.pop();
+
+    // return pilha.pop;
+
+    const resultado = pilha.pop();
+
+    // Pilha vazia, como em (), ou resultado inválido
+    if (!Number.isFinite(resultado)) {
+        throw new Error ('Erro');
+    }
+
+    // Inteiros não têm erro de casas decimais e não devem perder dígitos
+    if (Number.isInteger(resultado)) {
+        return resultado;
+    }
+
+    // Arredonda para 12 dígitos significativos
+    return Number(resultado.toPrecision(12));
 }

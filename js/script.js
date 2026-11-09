@@ -33,9 +33,9 @@ for (let i = 0; i < teclas.length; i++) {
         }
         else if (valor === '=') {
             try {
-                const tokensConvertidos = tokenizar(tokens); // Envia para função tokenizar
+                const tokensConvertidos = tokenizar(tokens); // Retorna resultado {12, +, 34}
 
-                // Verifica se o último token é operador
+                // Verifica se o último token é operador. Ex:  {12, +} removeria o +
                 const ultimoToken = tokensConvertidos[tokensConvertidos.length - 1];
 
                 if (['+', '-', 'x', '÷', '/'].includes(ultimoToken)) {
@@ -49,12 +49,14 @@ for (let i = 0; i < teclas.length; i++) {
                     return;
                 }
                 
+                // Converte para Padrão Polonês
                 const rpn = converterParaRpn(tokensConvertidos);
                 const resultado = calcularRPN(rpn);
 
                 display.value = String(resultado);
                 tokens.length = 0;
                 tokens.push(String(resultado)); // Exibe o resultado
+                // Captura erro
             } catch (erro) {
                 houveErro = true;
                 display.value = erro.message;
@@ -63,10 +65,10 @@ for (let i = 0; i < teclas.length; i++) {
             
         } else {
             // Se for zero substitui pelo valor pressionado
-            if (display.value === '0') {
+            if (display.value === '0' && valor !== '.') {
                 display.value = valor;
             } else {
-                display.value += valor; // Se não apenas add valor.
+                display.value += valor; // Se não, apenas add valor.
             }
 
             tokens.push(valor);
@@ -74,6 +76,3 @@ for (let i = 0; i < teclas.length; i++) {
         console.log(tokens);
     });
 }
-
-
-
