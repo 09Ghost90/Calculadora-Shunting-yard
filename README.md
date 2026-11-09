@@ -106,7 +106,6 @@ Ao clicar em `=`, o resultado vai para o display com `display.value = String(res
 
 ## Próximos passos
 
-- [ ] Menos unário
 - [ ] Suporte ao teclado físico
 
 ## Referências
@@ -116,4 +115,4 @@ Ao clicar em `=`, o resultado vai para o display com `display.value = String(res
 
 ## Autor
 
-Bruno Sousa Pereira, estudante de Engenharia de Computação na UFU.
+Bruno Sousa Pereira, estagiário Sonner.
