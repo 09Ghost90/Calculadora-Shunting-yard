@@ -103,14 +103,10 @@ Ao clicar em `=`, o resultado vai para o display com `display.value = String(res
 - **Parênteses**: ainda não implementados.
 - **Números negativos**: um `-` no início da expressão (menos unário) não é reconhecido.
 - **`%`**: calcula o resto da divisão, não porcentagem.
-- **Ponto flutuante**: `0.1 + 0.2` mostra `0.30000000000000004`, como em qualquer cálculo com `Number` no JavaScript.
 
 ## Próximos passos
 
-- [ ] Suporte a números decimais
-- [ ] Parênteses no Shunting-yard
 - [ ] Menos unário
-- [ ] Mensagem de erro para expressões inválidas e divisão por zero
 - [ ] Suporte ao teclado físico
 
 ## Referências
